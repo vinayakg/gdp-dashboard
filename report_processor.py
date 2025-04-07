@@ -371,22 +371,29 @@ class ReportComparator:
             verbose=True,
             process=Process.sequential
         )
-        # Prepare context with both key sections and full text (as much as can fit)
-        context = {
-            "client_name": client_name,
-            "client_report_key_sections": client_key_content[:30000],  # First 30K chars of key sections
-            "competitor_reports_key_sections": {name: content[:30000] for name, content in competitor_key_contents.items()},
-            "additional_client_info": client_text[:20000],  # Additional context from full report
-            "additional_competitor_info": {name: text[:20000] for name, text in competitor_texts.items()}
-        }        
 
-        # Instead of passing context directly to kickoff, update the tasks with the context
+        # Update task contexts using proper dictionary format
+        context_dict = {
+            "client_name": client_name,
+            "client_report": {
+                "key_sections": client_key_content[:30000],
+                "full_text": client_text[:20000]
+            },
+            "competitor_reports": {
+                name: {
+                    "key_sections": content[:30000],
+                    "full_text": competitor_texts[name][:20000]
+                } for name, content in competitor_key_contents.items()
+            }
+        }
+
+        # Set context for each task properly
         for task in crew.tasks:
-            task.context = context
+            task.context = context_dict
 
         # Run the analysis
         print("Starting AI analysis...")
-        raw_result = crew.kickoff()  # Remove the context parameter
+        raw_result = crew.kickoff()
         print("Analysis complete!")
         
         # Convert the raw result to a string for processing
