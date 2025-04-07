@@ -383,7 +383,7 @@ class ReportComparator:
         
         # Run the analysis
         print("Starting AI analysis...")
-        raw_result = crew.kickoff(inputs=context)
+        raw_result = crew.kickoff(context)
         print("Analysis complete!")
         
         # Convert the raw result to a string for processing
