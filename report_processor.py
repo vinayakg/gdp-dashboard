@@ -339,7 +339,7 @@ class ReportComparator:
             """,
             agent=risk_analyst,
             expected_output="Risk profile comparison with mitigation strategies",
-            context=[data_extraction_task]
+            context=[data_extraction_task, strategic_analysis_task]
         )
         
         trend_analysis_task = Task(
@@ -357,7 +357,7 @@ class ReportComparator:
             """,
             agent=trend_analyst,
             expected_output="Comprehensive trend analysis with future projections",
-            context=[data_extraction_task]
+            context=[data_extraction_task, strategic_analysis_task, risk_assessment_task]
         )
         
         # Prepare context for the crew - using key sections for more focused analysis
@@ -388,12 +388,12 @@ class ReportComparator:
         }
 
         # Set context for each task properly
-        for task in crew.tasks:
-            task.context = context_dict
+        # for task in crew.tasks:
+        #     task.context = context_dict
 
         # Run the analysis
         print("Starting AI analysis...")
-        raw_result = crew.kickoff()
+        raw_result = crew.kickoff(inputs=context_dict)
         print("Analysis complete!")
         
         # Convert the raw result to a string for processing

@@ -19,21 +19,21 @@ with st.sidebar:
     
     # Client bank information
     st.subheader("Client Bank")
-    client_name = st.text_input("Client Bank Name", value="")
-    client_url = st.text_input("Client Bank Report URL", value="")
+    client_name = st.text_input("Client Bank Name", value="ADIB")
+    client_url = st.text_input("Client Bank Report URL", value="https://www.adib.com/en/siteassets/annual%20reports/integrated-annual-report_2024_en.pdf")
     
     # Other banks information
     st.subheader("Other Banks (Maximum 2)")
     
     # First bank
     st.markdown("#### First Bank")
-    comp1_name = st.text_input("Name", key="comp1_name", value="")
-    comp1_url = st.text_input("Report URL", key="comp1_url", value="")
+    comp1_name = st.text_input("Name", key="comp1_name", value="FAB")
+    comp1_url = st.text_input("Report URL", key="comp1_url", value="https://www.bankfab.com/-/media/fab-uds/about-fab/investor-relations/reports-and-presentations/quarterly-and-annual-reports/2024/fab-annual-report-2024-en.pdf?view=1")
     
     # Second bank
     st.markdown("#### Second Bank")
-    comp2_name = st.text_input("Name", key="comp2_name", value="")
-    comp2_url = st.text_input("Report URL", key="comp2_url", value="")
+    comp2_name = st.text_input("Name", key="comp2_name", value="DIB")
+    comp2_url = st.text_input("Report URL", key="comp2_url", value="https://www.dib.ae/docs/default-source/reports/dib-integrated-annual-report-2024.pdf")
     
     # Analysis depth settings
     st.subheader("Analysis Settings")
